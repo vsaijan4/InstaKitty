@@ -4,6 +4,8 @@ import com.vsaijan4.profile.instakitty.model.Profile;
 import com.vsaijan4.profile.instakitty.repository.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneOffset;
@@ -35,10 +37,15 @@ public class ProfileService {
         return profileRepository.save(profile);
     }
 
-    public Profile update(String id, Profile profile) {
-        profile.setId(id);
-        profile.setUpdatedAt(ZonedDateTime.now(ZoneOffset.UTC));
-        return profileRepository.save(profile);
+    public Optional<Profile> update(String id, Profile profile) {
+        Optional<Profile> profileData = get(id);
+        if (profileData.isPresent()) {
+            profile.setId(id);
+            profile.setCreatedAt(profileData.get().getCreatedAt());
+            profile.setUpdatedAt(ZonedDateTime.now(ZoneOffset.UTC));
+            return Optional.of(profileRepository.save(profile));
+        }
+        return profileData;
     }
 
     public void delete(String id) {

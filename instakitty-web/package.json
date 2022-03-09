@@ -1,0 +1,19 @@
+{
+  "name": "instakitty-web",
+  "version": "0.1.0",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@vue/cli-service": "^5.0.1",
+    "axios": "^0.26.0",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "popper.js": "^1.16.1",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.12"
+  }
+}

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -56,11 +57,10 @@ public class ProfileController {
 
     @PutMapping("/profiles/{id}")
     public ResponseEntity<Profile> updateProfile(@PathVariable String id, @RequestBody Profile profile) {
-        log.info("updateProfile details for {}", id);
-        Optional<Profile> profileData = profileService.get(id);
+        Optional<Profile> profileData = profileService.update(id, profile);
         if (profileData.isPresent()) {
-            log.info("profile details Found for {}. Ready to update", id);
-            return new ResponseEntity<>(profileService.update(id, profile), HttpStatus.OK);
+            log.info("profile details Updated for {}", id);
+            return new ResponseEntity<>(profileData.get(), HttpStatus.OK);
         } else {
             log.info("profile Not Found for {}", id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,6 @@
 package com.vsaijan4.profile.instakitty.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Date;
 import java.time.ZonedDateTime;
 
 @Data
@@ -25,7 +27,10 @@ public class Profile {
     private String name;
     private String photo;
     private List<String> tags;
-    private int age;
+    
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date birthday;
+    
     private String gender;
     private String pronoun;
     private String type;
